@@ -1,49 +1,20 @@
 # Scrape Hyperplanning Polytech Nice Sophia
 
-Le but de cette application est d'être notifié dès qu'une nouvelle note est ajouté à Hyperplanning.
+Ces scripts Python utilisent Selenium avec Microsoft Edge comme WebDriver.  
+On peut toutefois utiliser un autre WebDriver ajoutant l'argument `--webdriver <nom>` à l'appel des scripts.
 
-Pour ce faire, nous avons 2 étapes :
-- Création d'un webhook Discord
-- Lancer l'application
+## Fonctionnalités
 
-<p style="text-align: justify">
-Cette application utilise la version 3.11 de Python (https://firefox-source-docs.mozilla.org/testing/geckodriver/Support.html). Il utilise la librairie Selenium avec Mozilla Firefox-esr v102.11.0
-et geckodriver v0.33.0 comme WebDriver (https://github.com/mozilla/geckodriver/releases).
-</p>
+![image](https://user-images.githubusercontent.com/70631622/213049214-a962caee-6548-427f-8e13-57cd612e6031.png)
 
-### Création d'un webhook Discord
+### `scrape_files.py`
 
-Aller dans les paramètres du serveur et ensuite sélectionner "Intégrations" :
-<p align="center">
-<img src="docs/add_webhook.png" width="500" alt="Intégrations"/>
-</p>
+Télécharge tous les fichiers de la catégorie *Enseignements/Ressources pédagogiques* et les dépose dans un répertoire `downloads/` à la racine du projet.
 
-Cliquer sur "Crée un webhook" :
-<p align="center">
-<img src="docs/create_webhook.png" width="500" alt="Crée un webhook"/>
-</p>
+### `scape_notes.py`
 
-Cliquer sur "Nouveau webhook" :
-<p align="center">
-<img src="docs/new_webhook.png" width="500" alt="Nouveau webhook"/>
-</p>
+Vérifie si la moyenne de l'étudiant a changé (comparaison avec `average.txt`) et indique dans la console s'il c'est le cas.
 
-Il suffit maintenant de customiser comme vous le souhaiter :
-<p align="center">
-<img src="docs/customize_webhook.png" width="500" alt="Customiser"/>
-</p>
+## À voir aussi
 
-### Lancé l'application
-
-
-##### Avec Docker
-
-- Premièrement il faut installer Docker sur votre machine : https://docs.docker.com/engine/install/
-- Ensuite vous devez créer et remplir le fichier de configuration : my_config.ini comme dans l'exemple : [exemple](config/my_config.ini.exemple)
-<p align="center">
-<img src="docs/config.png" width="500" alt="Configuration"/>
-</p>
-
-- Il n'y a plus qu'à exécuter le script qui va build et run l'image docker :
-  - linux : [runDockerImage.sh](runDockerImage.sh) (il faut rendre le exécutable grâce à cette commande : `chmod +x runDockerImage.sh`)
-  - cmd/powerShell : [runDockerImage.bat](runDockerImage.bat)
+- [Hyperplanning PNS par João Brilhante](https://github.com/JoaoBrlt/hyperplanning-pns) : Application permettant de récupérer des informations sur la disponibilité des salles de classe à Polytech Nice Sophia en utilisant le système Hyperplanning en utilisant l'API de calendrier (http://sco.polytech.unice.fr/1/Telechargements/ical/schedule.ics?version=2020.0.6.0&idICal={identifier}) et analysant les fichiers `.ical`.
